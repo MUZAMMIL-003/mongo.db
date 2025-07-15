@@ -4,7 +4,6 @@ import verifyToken from '../middleware/middleware.js';
 import User from '../modals/User.js';
 const router = express.Router();
 
-
 router.put('/:id', verifyToken, async (req, res) => { // Update user route
     try {
         const userId = req.params.id;
