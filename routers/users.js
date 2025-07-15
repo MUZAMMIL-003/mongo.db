@@ -21,6 +21,8 @@ router.put('/:id', verifyToken, async (req, res) => { // Update user route
     }
 });
 
+
+
 router.delete('/:id', verifyToken, async (req, res) => {
     try {
         const userId = req.params.id;
