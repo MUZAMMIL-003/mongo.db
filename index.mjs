@@ -26,6 +26,7 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
+
 app.use("/task", taskRoutes);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
