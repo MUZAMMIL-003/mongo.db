@@ -3,7 +3,7 @@ import 'dotenv/config';
 import mongoose from 'mongoose';
 import taskRoutes from './routers/task.js';
 import authRoutes from './routers/auth.js';
-import userRoutes from './routers/usersss.js';
+import userRoutes from './routers/users.js';
 
 const app = express();
 const PORT = 4000;

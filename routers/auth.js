@@ -16,14 +16,15 @@ const registerSchema = Joi.object({
         .min(3)
         .max(30)
         .required(),
-   email: Joi.string()
+    email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
     password: Joi.string().min(6)
 });
 
 
+
 const loginSchema = Joi.object({
-   email: Joi.string()
+    email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
     password: Joi.string().min(6).required()
 });
@@ -44,28 +45,27 @@ router.post("/register", async (req, res) => {
     newUser = await newUser.save();
 
     helperFunction(res, 201, newUser, false, 'User registered successfully');
- 
+
 });
 
 
 router.post("/login", async (req, res) => {
     const { error, value } = loginSchema.validate(req.body);
-    console.log("error=>", error)
     if (error) return helperFunction(res, 400, null, true, error);
-    const user = await User.findOne({ email: value.email }).lean()
+
+    const user = await User.findOne({ email: value.email }).lean();
     if (!user) return helperFunction(res, 403, null, true, 'User is not registered');
 
     const isPasswordValid = await bcrypt.compare(value.password, user.password);
     if (!isPasswordValid) return helperFunction(res, 403, null, true, 'Invalid password');
 
-    var token = jwt.sign(user, process.env['AUTH-SECRET']);
+    const token = jwt.sign(user, process.env['AUTH-SECRET']);
 
-
-    helperFunction(res, 200, {user, token}, false, 'User login successfully');
- 
+    helperFunction(res, 200, { user, token }, false, 'User login successfully');
 });
 
 
 
 
-    export default router;
+
+export default router;
