@@ -32,5 +32,6 @@ router.delete('/:id', verifyToken, async (req, res) => {
         helperFunction(res, 500, null, true, 'Internal Server Error');
     }
 });
+.
 
 export default router;
