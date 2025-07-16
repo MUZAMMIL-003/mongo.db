@@ -4,6 +4,33 @@ import verifyToken from '../middleware/middleware.js';
 import User from '../modals/User.js';
 const router = express.Router();
 
+
+
+router.get('/', verifyToken, async (req, res) => {
+  try {
+    helperFunction(res, 200, req.user, false, "User Fetched Successfully");
+  }
+  catch (err) {
+    helperFunction(res, 500, null, true, "Something went wrong");
+  }
+}
+)
+
+
+router.get('/:id', verifyToken, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+    if (!user) return helperFunction(res, 404, null, true, 'User not found');
+    helperFunction(res, 200, user, false, 'User fetched successfully');
+  }
+  catch (err) {
+    helperFunction(res, 500, null, true, "Something went wrong");
+  }
+}
+)
+
+
 router.put('/:id', verifyToken, async (req, res) => { // Update user route
     try {
         const userId = req.params.id;
@@ -20,6 +47,7 @@ router.put('/:id', verifyToken, async (req, res) => { // Update user route
         helperFunction(res, 500, null, true, 'Internal Server Error');
     }
 });
+
 
 
 
