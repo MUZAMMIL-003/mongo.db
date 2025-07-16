@@ -5,7 +5,7 @@ import 'dotenv/config';
 const verifyToken = (req, res, next) => {
     console.log("Middleware is running...");
 
-    const authHeader = req.headers.authorization;
+    const authHeader = req?.headers?.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return helperFunction(res, 401, null, true, 'No token provided or invalid format');
     }
