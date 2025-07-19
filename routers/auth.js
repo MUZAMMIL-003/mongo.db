@@ -43,6 +43,7 @@ router.post("/register", async (req, res) => {
 
     let newUser = new User({ ...value });
     newUser = await newUser.save();
+    console.log("newUser after save=>", newUser, newUser._id);
 
     helperFunction(res, 201, newUser, false, 'User registered successfully');
 
